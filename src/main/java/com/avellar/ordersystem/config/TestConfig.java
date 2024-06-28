@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import com.avellar.ordersystem.entities.Category;
 import com.avellar.ordersystem.entities.Order;
 import com.avellar.ordersystem.entities.OrderItem;
+import com.avellar.ordersystem.entities.Payment;
 import com.avellar.ordersystem.entities.Product;
 import com.avellar.ordersystem.entities.User;
 import com.avellar.ordersystem.entities.enums.OrderStatus;
@@ -80,6 +81,10 @@ public class TestConfig implements CommandLineRunner {
 		OrderItem oi4 = new OrderItem(o3, p5, 2);
 
 		orderItemrepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+
+		Payment pay1 = new Payment(null, Instant.parse("2023-06-20T21:53:07Z"), o1);
+		o1.setPayment(pay1);
+		orderRepository.save(o1);
 	}
 
 }
