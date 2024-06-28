@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.avellar.ordersystem.entities.Category;
 import com.avellar.ordersystem.entities.Order;
+import com.avellar.ordersystem.entities.OrderItem;
 import com.avellar.ordersystem.entities.Product;
 import com.avellar.ordersystem.entities.User;
 import com.avellar.ordersystem.entities.enums.OrderStatus;
 import com.avellar.ordersystem.repositories.CategoryRepository;
+import com.avellar.ordersystem.repositories.OrderItemRepository;
 import com.avellar.ordersystem.repositories.OrderRepository;
 import com.avellar.ordersystem.repositories.ProductRepository;
 import com.avellar.ordersystem.repositories.UserRepository;
@@ -33,6 +35,9 @@ public class TestConfig implements CommandLineRunner {
 
 	@Autowired
 	private ProductRepository productRepository;
+
+	@Autowired
+	private OrderItemRepository orderItemrepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -68,6 +73,13 @@ public class TestConfig implements CommandLineRunner {
 
 		userRepository.saveAll(Arrays.asList(u1, u2));
 		orderRepository.saveAll(Arrays.asList(o1, o2, o3));
+
+		OrderItem oi1 = new OrderItem(o1, p1, 2);
+		OrderItem oi2 = new OrderItem(o1, p3, 1);
+		OrderItem oi3 = new OrderItem(o2, p3, 2);
+		OrderItem oi4 = new OrderItem(o3, p5, 2);
+
+		orderItemrepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
 	}
 
 }
